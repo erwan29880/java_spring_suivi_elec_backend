@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.erwan.elec.config.Config;
@@ -19,7 +20,6 @@ import fr.erwan.elec.rest.ModelFront;
 import fr.erwan.elec.rest.Repo;
 import fr.erwan.elec.utils.DateManip;
 
-import java.sql.PreparedStatement;
 
 /**
  * la classe requêtes implémente les méthodes crud du repo, ainsi que d'autres méthodes : 

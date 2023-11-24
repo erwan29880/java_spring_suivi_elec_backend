@@ -2,14 +2,15 @@ package fr.erwan.elec.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
-import java.util.Optional;
 
-import fr.erwan.elec.rest.Model;
+
 import fr.erwan.elec.bdd.Requetes;
 
+/**
+ * La classe service implémente les méthodes de la classe Requetes
+ * TODO : implémenter des contrôles de données
+ */
 @Service
 public class Services {
     

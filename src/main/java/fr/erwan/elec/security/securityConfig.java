@@ -8,7 +8,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 
-
+/**
+ * gestion des accès aux routes
+ * TODO : implémenter
+ */
 @Configuration
 @EnableWebSecurity
 public class securityConfig {

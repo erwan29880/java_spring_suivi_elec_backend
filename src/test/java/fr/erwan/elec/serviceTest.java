@@ -1,23 +1,20 @@
 package fr.erwan.elec;
 
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
-import java.util.Optional;
 
 import fr.erwan.elec.rest.Services;
-import fr.erwan.elec.config.Config;
 import fr.erwan.elec.rest.Model;
 import fr.erwan.elec.rest.ModelFront;
 
-
+/**
+ * classe de tests de la classe rest.Services
+ */
 @SpringBootTest
 public class serviceTest {
 

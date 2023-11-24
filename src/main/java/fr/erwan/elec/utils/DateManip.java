@@ -3,7 +3,13 @@ package fr.erwan.elec.utils;
 import java.time.LocalDateTime;
 
 
+/**
+ * classe de manipulation de dates entre le format String et le format java.sql.Date 
+ * le format String est YYYY-MM-DDThh:mm:ss
+ * le format sql est YYYY-MM-DD
+ */
 public class DateManip {
+
     public DateManip() {}
 
     /**
@@ -58,7 +64,7 @@ public class DateManip {
 							.append("00:00:00")
 							.toString(); 
 
-        // minuit -1
+        // minuit -1 seconde
 		String maxDate = new StringBuilder()
 					.append(prefix)
 					.append("T")

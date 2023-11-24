@@ -1,15 +1,14 @@
 package fr.erwan.elec;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertNotEquals;
 
 import fr.erwan.elec.utils.DateManip;
 
+/**
+ * classe de tests de la classe utils.DateManip
+ */
 @SpringBootTest
 public class utilsTest {
     

@@ -2,6 +2,9 @@ package fr.erwan.elec.rest;
 import java.util.Optional;
 import java.util.List;
 
+/**
+ * interface crud
+ */
 public interface Repo {
     public List<Model> getData();
     public Optional<Model> getDataById(long id);

@@ -1,7 +1,12 @@
 package fr.erwan.elec.rest;
-// import java.sql.Date;
 
-
+/**
+ * classe qui correspond au schéma de la table elec : 
+ *  - id géré par sqlite (autoincrement)
+ *  - hp : heures pleines 
+ *  - hc : heures creuses
+ *  - insertedat : la date au format YYYY-MM-DD
+ */
 public class Model {
     private long id;
     private double hp;

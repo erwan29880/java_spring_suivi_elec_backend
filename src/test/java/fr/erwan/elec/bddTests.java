@@ -1,26 +1,25 @@
 package fr.erwan.elec;
 
+import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import fr.erwan.elec.bdd.Connect;
 import fr.erwan.elec.bdd.Requetes;
 import fr.erwan.elec.config.Config;
-import fr.erwan.elec.errors.EnvError;
 import fr.erwan.elec.rest.Model;
 import fr.erwan.elec.rest.ModelFront;
 
 
+/**
+ * classe de test de la classe bdd.Requetes
+ */
 @SpringBootTest
 public class bddTests {
     

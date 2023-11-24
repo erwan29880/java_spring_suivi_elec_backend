@@ -1,5 +1,10 @@
 package fr.erwan.elec.rest;
 
+/**
+ * classe jumelle de la classe Model
+ * la date est au format String 
+ * classe utilisée pour récupérer le json du front-end
+ */
 public class ModelFront {
     private long id;
     private double hp;
