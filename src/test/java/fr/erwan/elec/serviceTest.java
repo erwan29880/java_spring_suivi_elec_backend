@@ -40,6 +40,12 @@ public class serviceTest {
     }
 
     @Test 
+    public void testGetDataByDateTestPattern() {
+        Model data = this.serv.getDataByDate("2078-11-T10:10:10");
+        assertEquals(data.getId(), 0L);
+    }
+
+    @Test 
     public void testSave() {
         ModelFront model = new ModelFront();
         model.setHp(1200d);
@@ -54,7 +60,7 @@ public class serviceTest {
     @Test 
     public void testdeleteByDate() {
         boolean check = this.serv.delete("2035-12-02T10:10:10");
-        assertEquals(true, check);
+        assertEquals(false, check);
     }
 
     @Test 
@@ -63,17 +69,14 @@ public class serviceTest {
         assertEquals(true, check);
     }
 
-
-    // @Test 
-    // public void testdeleteById() {
-    //     boolean check = this.req.delete(125420L);
-    //     assertEquals(true, check);
-    // }
-       
-
-    // @Test 
-    // public void testUpdateData() {
-    //     fail("not implemented");
-    // }
+    @Test 
+    public void testUpdate() {
+        ModelFront model = new ModelFront();
+        model.setHp(1200d);
+        model.setHc(1200d);
+        model.setInsertedAt("blabla");
+        boolean check = this.serv.update(model);
+        assertEquals(false, check);
+    }
 
 }

@@ -54,11 +54,6 @@ public class bddTests {
     }
 
 
-    // @Test 
-    // public void testUpdateData() {
-    //     fail("not implemented");
-    // }
-
     @Test 
     public void testInsertData() {
         ModelFront model = new ModelFront();
@@ -109,8 +104,18 @@ public class bddTests {
 
         // get last id
         Model m = this.req.getDataByLastId();
+        assertNotEquals(0L, m.getId());
+
+        model.setId(m.getId());
+        model.setHc(125478d);
+        model.setHp(87987d);
+        model.setInsertedAt("2035-12-02T10:10:10");
+        boolean check = this.req.update(model);
+
+        assertEquals(true, check);
         
         // delete
-        boolean check = this.req.delete(m.getId());
+        boolean checkDel = this.req.delete(m.getId());
+        assertEquals(true, checkDel);
     }
 }

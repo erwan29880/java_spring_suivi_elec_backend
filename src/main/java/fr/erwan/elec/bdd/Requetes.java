@@ -31,7 +31,6 @@ import fr.erwan.elec.utils.DateManip;
  *  - mise à jour d'un enregistrement
  * 
  * Elle utilise la connexion à la base de données Connect
- * TODO : close connection 
  */
 @Component
 public class Requetes extends Connect implements Repo{
@@ -50,6 +49,7 @@ public class Requetes extends Connect implements Repo{
         try (Connection conn = super.connexion();){
             Statement stmt  = conn.createStatement();
             stmt.execute(sql);
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -66,6 +66,7 @@ public class Requetes extends Connect implements Repo{
         try (Connection conn = super.connexion();){
             Statement stmt  = conn.createStatement();
             stmt.execute(sql);
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -94,6 +95,12 @@ public class Requetes extends Connect implements Repo{
             stmt.setDate(3, DateManip.toSqlDate("2023-11-24T10:30:00"));
             stmt.executeUpdate();
 
+            stmt  = conn.prepareStatement(sql);
+            stmt.setDouble(1, 51d);
+            stmt.setDouble(2, 25d);
+            stmt.setDate(3, DateManip.toSqlDate("2023-11-25T10:30:00"));
+            stmt.executeUpdate();
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -121,6 +128,7 @@ public class Requetes extends Connect implements Repo{
                 model.setInsertedAt(rs.getDate("insertedat"));
                 m.add(model);
             }
+            super.closeConnexion(conn);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -150,6 +158,7 @@ public class Requetes extends Connect implements Repo{
                 model.setInsertedAt(rs.getDate("insertedat"));
                 m = Optional.of(model);
             }
+            super.closeConnexion(conn);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -174,6 +183,7 @@ public class Requetes extends Connect implements Repo{
                 m.setHc(rs.getDouble("hc"));
                 m.setInsertedAt(rs.getDate("insertedat"));
             }
+            super.closeConnexion(conn);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -207,6 +217,7 @@ public class Requetes extends Connect implements Repo{
                 model.setInsertedAt(rs.getDate("insertedat"));
                 m = Optional.of(model);
             }
+            super.closeConnexion(conn);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -230,6 +241,7 @@ public class Requetes extends Connect implements Repo{
             stmt.setDouble(2, model.getHc());
             stmt.setDate(3, dat);
             stmt.executeUpdate();
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -255,6 +267,7 @@ public class Requetes extends Connect implements Repo{
             stmt.setDate(3, dat);
             stmt.setLong(4, model.getId());
             stmt.executeUpdate();
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -275,6 +288,7 @@ public class Requetes extends Connect implements Repo{
         ){
             stmt.setLong(1, id);
             stmt.executeUpdate();
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -298,6 +312,7 @@ public class Requetes extends Connect implements Repo{
             stmt.setDouble(1, hp);
             stmt.setDouble(2, hc);
             stmt.executeUpdate();
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -319,6 +334,7 @@ public class Requetes extends Connect implements Repo{
             stmt.setDate(1, dates[0]);
             stmt.setDate(2, dates[1]);
             stmt.executeUpdate();
+            super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -331,8 +347,11 @@ public class Requetes extends Connect implements Repo{
      * créer la table et la remplir 
      * méthode accessible en développement
      */
-    public void createAndFillTable() {
+    public void createAndFillTable(final boolean del) {
         if (Config.getEnv() == "dev") {
+            if (del) {
+                this.deleteTable();
+            }
             this.createTable();
             this.insertInitialData();
         }

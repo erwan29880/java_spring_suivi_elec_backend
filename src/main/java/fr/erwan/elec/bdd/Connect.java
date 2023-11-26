@@ -14,7 +14,6 @@ public class Connect {
      * méthode accessible dans le package bdd
      * utilisée dans la classe Requetes
      * @return la connection
-     * TODO : close connection
      * @throws SQLException
      */
     protected Connection connexion() throws SQLException {
@@ -32,6 +31,16 @@ public class Connect {
             return this.connexion();
         }
         return null;
+    }
+
+    /**
+     * fermeture de la connection à la base de données
+     * méthode utilisée dans le classe Requetes
+     * @param conn connection sql
+     * @throws SQLException
+     */
+    protected void closeConnexion(Connection conn) throws SQLException {
+        conn.close();
     }
 
 
