@@ -28,6 +28,13 @@ public class serviceTest {
     }
 
     @Test 
+    public void testGetDataLagged() {
+        List<Model> data = this.serv.getDataLagged();
+        assertNotEquals(0, data.size());
+    }
+
+
+    @Test 
     public void testGetDataById() {
         Model data = this.serv.getDataById(12589785423L);
         assertEquals(data.getId(), 0L);

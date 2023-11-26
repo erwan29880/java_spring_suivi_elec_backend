@@ -53,6 +53,12 @@ public class bddTests {
         assertNotEquals(0, data.size());
     }
 
+    @Test 
+    public void testGetDataLagged() {
+        List<Model> data = this.req.getDataLagged();
+        assertNotEquals(0, data.size());        
+    }
+
 
     @Test 
     public void testInsertData() {

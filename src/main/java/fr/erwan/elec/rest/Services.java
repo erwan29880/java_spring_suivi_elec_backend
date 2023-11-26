@@ -26,6 +26,11 @@ public class Services {
         return this.req.getData();
     }
 
+    public List<Model> getDataLagged() {
+        return this.req.getDataLagged();
+    }
+
+
     /**
      * get all data by id
      * @param id

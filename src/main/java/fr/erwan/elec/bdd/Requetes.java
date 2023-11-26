@@ -100,6 +100,12 @@ public class Requetes extends Connect implements Repo{
             stmt.setDouble(2, 25d);
             stmt.setDate(3, DateManip.toSqlDate("2023-11-25T10:30:00"));
             stmt.executeUpdate();
+
+            stmt  = conn.prepareStatement(sql);
+            stmt.setDouble(1, 65d);
+            stmt.setDouble(2, 33d);
+            stmt.setDate(3, DateManip.toSqlDate("2023-11-26T10:30:00"));
+            stmt.executeUpdate();
             super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {
@@ -116,6 +122,44 @@ public class Requetes extends Connect implements Repo{
     public List<Model> getData() {
         List<Model> m = new ArrayList<Model>();
         String sql = "select * from elec order by id;";
+        try (Connection conn = super.connexion();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql);
+        ){
+            while (rs.next()) {
+                Model model = new Model();
+                model.setId(rs.getLong("id"));
+                model.setHp(rs.getDouble("hp"));
+                model.setHc(rs.getDouble("hc"));
+                model.setInsertedAt(rs.getDate("insertedat"));
+                m.add(model);
+            }
+            super.closeConnexion(conn);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return m; 
+    }
+
+    /**
+     * requête analytique pour graphique front-end
+     * @return les données avec un lag de 1 jour pour éviter le cumul sur hp et hc
+     */
+    public List<Model> getDataLagged() {
+        List<Model> m = new ArrayList<Model>();
+        String sql = new StringBuilder()
+                    .append("with agg as(")
+                    .append("SELECT ")
+                    .append("id,")
+                    .append("hp - LAG(hp) OVER(ORDER BY id) AS hp,")
+                    .append("hc - LAG(hc) OVER(ORDER BY id) AS hc,")
+                    .append("insertedat ")
+                    .append("FROM elec ")
+                    .append("ORDER BY id")
+                    .append(") ")
+                    .append("SELECT agg.* FROM agg WHERE agg.hp IS NOT NULL;")
+                    .toString();
+        
         try (Connection conn = super.connexion();
             Statement stmt  = conn.createStatement();
             ResultSet rs    = stmt.executeQuery(sql);
@@ -346,6 +390,7 @@ public class Requetes extends Connect implements Repo{
     /**
      * créer la table et la remplir 
      * méthode accessible en développement
+     * @param del : supprimer la table
      */
     public void createAndFillTable(final boolean del) {
         if (Config.getEnv() == "dev") {
@@ -358,6 +403,7 @@ public class Requetes extends Connect implements Repo{
     }
 
     /**
+     * méthode accessible uniquement pour les tests en développement
      * supprimer la table si besoin
      *  -> sqlite ne prend pas en compte le truncate
      * @return un boolean
