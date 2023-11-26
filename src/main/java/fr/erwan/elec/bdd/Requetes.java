@@ -25,12 +25,14 @@ import fr.erwan.elec.utils.DateManip;
  * la classe requêtes implémente les méthodes crud du repo, ainsi que d'autres méthodes : 
  *  - création de la table
  *  - insertion des données initiales
+ *  - récupérer toutes les données avec hp hc en cumulé
  *  - récupérer toutes les données
  *  - récupérer un enregistrement par date ou par id
  *  - supprimer un enregistrement par date, id ou (pour les tests) par hp et hc 
  *  - mise à jour d'un enregistrement
  * 
  * Elle utilise la connexion à la base de données Connect
+ * @author erwan tanguy
  */
 @Component
 public class Requetes extends Connect implements Repo{
@@ -42,7 +44,7 @@ public class Requetes extends Connect implements Repo{
     /**
      * créer la table elec
      * méthode utilisée dans la méthode createAndFill ci-dessous, accessible uniquement en développement
-     * @return un booléen
+     * @return true ou false
      */
     private boolean createTable() {
         String sql = "CREATE TABLE IF NOT EXISTS elec (id INTEGER PRIMARY KEY AUTOINCREMENT, hp double, hc double, insertedat date);";
@@ -59,7 +61,7 @@ public class Requetes extends Connect implements Repo{
 
     /**
      * supprimer la table elec
-     * @return booléen
+     * @return true ou false
      */
     private boolean deleteTable() {
         String sql = "DROP TABLE elec;";
@@ -77,7 +79,7 @@ public class Requetes extends Connect implements Repo{
     /**
      * Insertion des données initiales
      * méthode utilisée dans la méthode createAndFill ci-dessous, uniquement accessible en développement
-     * @return booléen
+     * @return true ou false
      */
     private boolean insertInitialData() {
         String sql = "INSERT INTO elec(hp, hc, insertedat) values (?, ?, ?);";
@@ -116,7 +118,7 @@ public class Requetes extends Connect implements Repo{
 
 
     /**
-     * Récupérer toutes les données
+     * Récupérer toutes les données avec hp hc en cumulé
      * @return une liste des enregistrements
      */
     public List<Model> getData() {
@@ -182,7 +184,7 @@ public class Requetes extends Connect implements Repo{
     
     /**
      * touver un enregistrement par id
-     * @param id
+     * @param id l'id de l'enregistrement
      * @return un optional vide ou correspondant à l'entrée demandée
      */
     public Optional<Model> getDataById(long id) {
@@ -273,7 +275,7 @@ public class Requetes extends Connect implements Repo{
      * enregistrer une entrée
      * la date est la date du jour
      * @param model le modèle avec la date au format string
-     * @return un boolean
+     * @return true ou false
      */
     public boolean save(ModelFront model) {
         Date dat = DateManip.toSqlDateFromToday();
@@ -298,7 +300,7 @@ public class Requetes extends Connect implements Repo{
      * mise à jour d'une entrée par id
      * les paramètres hp, hc, dates (string) doivent être fournis
      * @param model le modèle avec la date au format string
-     * @return un boolean
+     * @return true ou false
      */
     public boolean update(ModelFront model) {
         String sql = "UPDATE elec set hp=?, hc=?, insertedat=? where id=?;";
@@ -322,8 +324,8 @@ public class Requetes extends Connect implements Repo{
 
     /**
      * supprimer une entrée par id
-     * @param id 
-     * @return un boolean
+     * @param id l'id de l'enregistrement
+     * @return true ou false
      */
     public boolean delete(long id) {
         String sql = "DELETE FROM elec where id=?;";
@@ -346,7 +348,7 @@ public class Requetes extends Connect implements Repo{
      * méthode utilisée pour les tests uniquement
      * @param hp heures pleines
      * @param hc heures creuses
-     * @return un boolean
+     * @return true ou false
      */
     public boolean delete(double hp, double hc) {
         String sql = "DELETE FROM elec where hp=? and hc=?;";
@@ -366,8 +368,10 @@ public class Requetes extends Connect implements Repo{
 
     /**
      * supprimer une entrée par date
+     * la date est analysée et recherchée selon la plage minuit - 23h59'59
+     * 
      * @param dat sous forme YYYY-MM-DDThh:mm:ss
-     * @return un boolean
+     * @return true ou false
      */
     public boolean delete(String dat) {
         String sql = "DELETE FROM elec where insertedat>=? and insertedat<=?;";

@@ -43,6 +43,10 @@ import java.util.List;
  * Routes put 
  * /elec/update
  * 
+ * @author erwan tanguy$
+ * @see classe Serives
+ * @See classe Requetes
+ * @See package security
  */
 @RestController()
 @RequestMapping("/elec")
@@ -59,7 +63,7 @@ public class Controlleur {
      */
 
     /**
-     * loggin
+     * méthode de loggin, en accès authorisé
      * @param user {pseudo:String, password:String}
      * @return le token jwt ou une erreur
      */
@@ -75,7 +79,8 @@ public class Controlleur {
     }
 
     /**
-     * gestion jwt
+     * méthode de vérification pour le token JWT venant du front-end
+     * @return une réponse par défaut, et un code d'erreur géré par Spring security
      */
     @PostMapping("/jwt")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
@@ -91,7 +96,8 @@ public class Controlleur {
 
 
     /**
-     * toutes les entrées de la table elec
+     * Récupérer toutes les entrées de la table elec
+     * @return toutes les données
      */
     @GetMapping("/all")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
@@ -100,7 +106,8 @@ public class Controlleur {
     }
 
     /**
-     * toutes les requêtes de la table elec avec hp et hc non cumulés
+     * Récupérer toutes les requêtes de la table elec avec hp et hc non cumulés
+     * @return les données sauf la première entrée
      */
     @GetMapping("/all/lag")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
@@ -110,8 +117,8 @@ public class Controlleur {
 
     
     /**
-     * trouver une entrée de la table elec par id
-     * @param id
+     * récupérer une entrée de la table elec par id
+     * @param id l'id de l'enregistrement
      * @return l'entrée demandée ou un objet vide
      */
     @GetMapping("/{id}")
@@ -121,7 +128,7 @@ public class Controlleur {
     }
 
     /**
-     * trouver une entrée de la table elec par date
+     * Récupérer une entrée de la table elec par date
      * @param dat date au format YYYY-MM-DDThh:mm:ss
      * @return l'entrée demandée ou un objet vide
      */
@@ -131,6 +138,11 @@ public class Controlleur {
         return this.serv.getDataByDate(dat);
     }
 
+    /**
+     * Enregistrer des données dans la table elec
+     * @param model @see classe ModelFront
+     * @return un message et un status code
+     */
     @PostMapping("/save")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
     public ResponseEntity<MessageFront> save(@RequestBody final ModelFront model) {
@@ -142,6 +154,11 @@ public class Controlleur {
         }
     }
 
+    /**
+     * supprimer une entrée par date
+     * @param s date au format YYYY-MM-DDThh:mm-ss
+     * @return un message et un status code
+     */
     @DeleteMapping("/delete/d/{dat}")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
     public ResponseEntity<MessageFront> deleteByDate(@PathVariable final String s) {
@@ -153,6 +170,12 @@ public class Controlleur {
         }
     }
 
+
+    /**
+     * supprimer une entrée par id
+     * @param id l'id de l'enregistrement
+     * @return un message et un status code
+     */
     @DeleteMapping("/delete/{id}")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
     public ResponseEntity<MessageFront> deleteByDate(@PathVariable final long id) {
@@ -165,6 +188,11 @@ public class Controlleur {
     }
 
 
+    /**
+     * Effectuer une mise à jour d'un enregistrement
+     * @param model @see classe ModelFront
+     * @return un message et un status code
+     */
     @PutMapping("/update")
     @CrossOrigin(origins = {"http://localhost"}, exposedHeaders = {"Authorization"})
     public ResponseEntity<MessageFront> update(@RequestBody final ModelFront model) {

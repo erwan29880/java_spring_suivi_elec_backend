@@ -5,6 +5,8 @@ package fr.erwan.elec.config;
  *  - permet de récupérer le chemin absolu de la base de données sqlite
  *  - permet de définir l'environnement : prod ou dev. Les tests ne peuvent fonctionner qu'en dev.
  *      défini dans le main.
+ * 
+ * @author erwan tanguy
  */
 public class Config {
     // prod / dev
@@ -15,7 +17,6 @@ public class Config {
 
     public Config() {
     }
-
 
     // getters setters
 

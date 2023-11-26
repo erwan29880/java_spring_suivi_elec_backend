@@ -9,6 +9,10 @@ import fr.erwan.elec.utils.Verifications;
 
 /**
  * La classe service implémente les méthodes de la classe Requetes
+ * 
+ * @author erwan tanguy 
+ * @see classe Requetes 
+ * @see classe Controlleur
  */
 @Service
 public class Services {

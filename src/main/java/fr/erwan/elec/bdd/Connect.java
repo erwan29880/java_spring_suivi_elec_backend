@@ -6,6 +6,10 @@ import java.sql.SQLException;
 
 import fr.erwan.elec.config.Config;
 
+/**
+ * Classe pour établir la connection à la base de données sqlite
+ * @author erwan tanguy
+ */
 public class Connect {
 
     public Connect() {}
@@ -13,6 +17,7 @@ public class Connect {
     /**
      * méthode accessible dans le package bdd
      * utilisée dans la classe Requetes
+     * 
      * @return la connection
      * @throws SQLException
      */
@@ -23,7 +28,8 @@ public class Connect {
     /**
      * méthode publique pour retourner la connection
      * méthode disponible uniquement en développement pour les tests
-     * @return la connection
+     * 
+     * @return la connection sql
      * @throws SQLException
      */
     public Connection getConnexion() throws SQLException {
@@ -36,6 +42,7 @@ public class Connect {
     /**
      * fermeture de la connection à la base de données
      * méthode utilisée dans le classe Requetes
+     * 
      * @param conn connection sql
      * @throws SQLException
      */
