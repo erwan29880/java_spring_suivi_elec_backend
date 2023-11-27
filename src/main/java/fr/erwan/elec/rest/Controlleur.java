@@ -76,10 +76,6 @@ public class Controlleur {
     @PostMapping("/signIn")
     @CrossOrigin(origins = {"http://localhost:3000"})
     public ResponseEntity<?> signIn(@AuthenticationPrincipal UserDto user) {
-        // System.out.println(user);
-        // if (user.getLogin() != this.login) {
-        //     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageFront("bad credentials"));
-        // }
         try {
             user.setpassword(userAuthenticationProvider.createToken(user.getLogin()));
             return ResponseEntity.ok(new TokenDto(user.getpassword()));
