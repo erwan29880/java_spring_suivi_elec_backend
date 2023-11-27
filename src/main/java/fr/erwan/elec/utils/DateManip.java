@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * classe de manipulation de dates entre le format String et le format java.sql.Date 
  * le format String est YYYY-MM-DDThh:mm:ss
  * le format sql est YYYY-MM-DD
- * @see bdd.Requetes
+ * @see fr.erwan.elec.bdd.Requetes
  * 
  * @author erwan tanguy 
  */

@@ -11,6 +11,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * vérification lors du signIn
+ */
 public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -20,6 +23,9 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
         this.userAuthenticationProvider = userAuthenticationProvider;
     }
 
+    /**
+     * vérification lors du signIn
+     */
     @Override
     protected void doFilterInternal(
             HttpServletRequest req,

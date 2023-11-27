@@ -411,7 +411,7 @@ public class Requetes extends Connect implements Repo{
      * supprimer la table si besoin
      *  -> sqlite ne prend pas en compte le truncate
      * @return un boolean
-     * @throws EnvError
+     * @throws EnvError erreur si l'environnement est production
      */
     public boolean getDeleteTable() throws EnvError {
         if (Config.getEnv() == "dev") {

@@ -11,8 +11,8 @@ import fr.erwan.elec.utils.Verifications;
  * La classe service implémente les méthodes de la classe Requetes
  * 
  * @author erwan tanguy 
- * @see classe Requetes 
- * @see classe Controlleur
+ * @see fr.erwan.elec.bdd.Requetes
+ * @see fr.erwan.elec.rest.Controlleur
  */
 @Service
 public class Services {
@@ -23,13 +23,17 @@ public class Services {
     public Services() {}
 
     /**
-     * get all data
+     * récupérer toutes les données avec hp, hc en cumulé
      * @return toutes les données
      */
     public List<Model> getData() {
         return this.req.getData();
     }
 
+    /**
+     * récupérer toutes les données avec hp, hc
+     * @return toutes les données
+     */
     public List<Model> getDataLagged() {
         return this.req.getDataLagged();
     }

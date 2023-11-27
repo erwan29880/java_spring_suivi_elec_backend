@@ -1,5 +1,8 @@
 package fr.erwan.elec.security;
 
+/**
+ * Gestion du token
+ */
 public class TokenDto {
     
     private String token;

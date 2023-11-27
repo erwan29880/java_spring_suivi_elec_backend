@@ -14,10 +14,16 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+* filtrage des requêtes : tout bloquer 
+*/
 @Component
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint{
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    /**
+     * filtrage des requêtes : tout bloquer 
+     */
     @Override
     public void commence(
             HttpServletRequest request,

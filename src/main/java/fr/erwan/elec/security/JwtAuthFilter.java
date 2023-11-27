@@ -10,6 +10,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * filtrage filterChain par token JWT
+*/
 public class JwtAuthFilter extends OncePerRequestFilter{
     
     private final UserAuthenticationProvider userAuthenticationProvider;
@@ -18,6 +21,9 @@ public class JwtAuthFilter extends OncePerRequestFilter{
         this.userAuthenticationProvider = userAuthenticationProvider;
     }
 
+    /**
+    * Vérification que le header de la requête contient le token
+    */
     @Override
     protected void doFilterInternal(
             HttpServletRequest httpServletRequest,

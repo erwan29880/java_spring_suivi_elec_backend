@@ -46,7 +46,7 @@ public class UserAuthenticationProvider {
     /**
      * Création du token
      * @param login vient du front
-     * @return
+     * @return le token jwt
      */
     public String createToken(String login) {
         Date now = new Date();
@@ -64,7 +64,7 @@ public class UserAuthenticationProvider {
     /**
      * validation du token
      * @param token vient du front
-     * @return
+     * @return une authentication
      */
     public Authentication validateToken(String token) {
         
@@ -84,6 +84,12 @@ public class UserAuthenticationProvider {
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 
+
+    /**
+     * méthode de vérification du token
+     * @param token jwt
+     * @return true ou false
+     */
     public boolean validateToken2(String token) {
         String TokenSplitted = token.split(" ")[1];
         Algorithm algorithm = Algorithm.HMAC256(this.secretKey);
@@ -107,6 +113,12 @@ public class UserAuthenticationProvider {
         return false;
     }
 
+
+    /**
+     * vérification des credentials
+     * @param credentialsDto un objet credentialDto
+     * @return une autentication
+     */
     public Authentication validateCredentials(CredentialsDto credentialsDto) {
         UserDto user = authenticationService.authenticate(credentialsDto);
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());

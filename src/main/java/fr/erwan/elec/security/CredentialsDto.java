@@ -1,5 +1,8 @@
 package fr.erwan.elec.security;
 
+/**
+ * Vérification des infos de connection
+*/
 public class CredentialsDto {
     
     private String login;

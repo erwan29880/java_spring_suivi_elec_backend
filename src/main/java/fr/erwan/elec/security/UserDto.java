@@ -1,5 +1,8 @@
 package fr.erwan.elec.security;
 
+/**
+ * objet user
+ */
 public class UserDto {
     private String login;
     private String password;

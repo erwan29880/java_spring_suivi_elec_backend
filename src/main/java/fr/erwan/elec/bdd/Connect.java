@@ -19,7 +19,7 @@ public class Connect {
      * utilisée dans la classe Requetes
      * 
      * @return la connection
-     * @throws SQLException
+     * @throws SQLException connection non établie
      */
     protected Connection connexion() throws SQLException {
         return DriverManager.getConnection("jdbc:sqlite:" + Config.getDbPath());
@@ -30,7 +30,7 @@ public class Connect {
      * méthode disponible uniquement en développement pour les tests
      * 
      * @return la connection sql
-     * @throws SQLException
+     * @throws SQLException connection non établie
      */
     public Connection getConnexion() throws SQLException {
         if (Config.getEnv() == "dev") {
@@ -49,6 +49,4 @@ public class Connect {
     protected void closeConnexion(Connection conn) throws SQLException {
         conn.close();
     }
-
-
 }

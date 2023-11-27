@@ -7,14 +7,14 @@ import fr.erwan.elec.rest.ModelFront;
 
 /**
  * Classe de vérifications des données provenant du front-end
- * @see rest.Services
+ * @see fr.erwan.elec.rest.Services
  */
 public class Verifications {
     
     public Verifications() {}
 
     /**
-     * méthode d'échappement des caractères html < > etc
+     * méthode d'échappement des caractères html
      * @param s la donnée à échapper
      * @return la chaîne de caractère échappée
      */
@@ -36,8 +36,7 @@ public class Verifications {
 
     /**
      * Vérification de données : 
-     * @see rest.ModelFront
-     * @see datePatternChecker
+     * @see fr.erwan.elec.rest.ModelFront
      * @param model
      * @return true ou false
      */

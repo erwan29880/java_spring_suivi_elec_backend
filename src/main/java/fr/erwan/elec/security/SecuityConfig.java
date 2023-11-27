@@ -9,7 +9,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-
+/**
+ * gestion du routing au niveau de spring security
+*/
 @Configuration
 @EnableWebSecurity
 public class SecuityConfig {
@@ -23,6 +25,12 @@ public class SecuityConfig {
         this.userAuthenticationProvider = userAuthenticationProvider;
     }
 
+    /**
+     * filtrage des requêtes
+     * @param http http de spring security
+     * @return le http de spring security
+     * @throws Exception si nécessaire
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {        
         http

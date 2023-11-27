@@ -9,6 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 public class PasswordConfig {
+    
+    /**
+	* cryptage du mot de passe avec BCrypt
+	* @return le mot de passe encodé
+	*/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
