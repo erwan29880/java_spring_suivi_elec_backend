@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.erwan.elec.security.TokenDto;
+import fr.erwan.elec.security.TokenFront;
 import fr.erwan.elec.security.UserAuthenticationProvider;
 import fr.erwan.elec.security.UserDto;
 
@@ -60,9 +61,6 @@ public class Controlleur {
     @Autowired 
     private UserAuthenticationProvider userAuthenticationProvider;
  
-    @Value("${application.login}")
-    private String login;
-
 
     /*
      * SECURITY ------------------------------------------------------------------
@@ -80,7 +78,6 @@ public class Controlleur {
             user.setpassword(userAuthenticationProvider.createToken(user.getLogin()));
             return ResponseEntity.ok(new TokenDto(user.getpassword()));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageFront("bad credentials"));
         }
     }
@@ -91,8 +88,13 @@ public class Controlleur {
      */
     @PostMapping("/jwt")
     @CrossOrigin(origins = {"http://localhost:3000"}, exposedHeaders = {"Authorization"})
-    public ResponseEntity<String> checkJwt() {
-        return ResponseEntity.ok("ok");
+    public ResponseEntity<MessageFront> checkJwt(@RequestBody TokenFront token) {
+        boolean check = this.userAuthenticationProvider.validateToken2(token.getToken());
+        if (check) {
+            return ResponseEntity.ok(new MessageFront("ok"));
+        } else {
+            return ResponseEntity.ok(new MessageFront("pasok"));
+        }
     }
 
 
@@ -157,7 +159,7 @@ public class Controlleur {
         if (check) {
             return new ResponseEntity<MessageFront>(new MessageFront("ok"), HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<MessageFront>(new MessageFront("oups"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<MessageFront>(new MessageFront("pasok"), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -173,7 +175,7 @@ public class Controlleur {
         if (check) {
             return new ResponseEntity<MessageFront>(new MessageFront("ok"), HttpStatus.OK);
         } else {
-            return new ResponseEntity<MessageFront>(new MessageFront("oups"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<MessageFront>(new MessageFront("pasok"), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -190,7 +192,7 @@ public class Controlleur {
         if (check) {
             return new ResponseEntity<MessageFront>(new MessageFront("ok"), HttpStatus.OK);
         } else {
-            return new ResponseEntity<MessageFront>(new MessageFront("oups"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<MessageFront>(new MessageFront("pasok"), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -207,7 +209,7 @@ public class Controlleur {
         if (check) {
             return new ResponseEntity<MessageFront>(new MessageFront("ok"), HttpStatus.OK);
         } else {
-            return new ResponseEntity<MessageFront>(new MessageFront("oups"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<MessageFront>(new MessageFront("pasok"), HttpStatus.BAD_REQUEST);
         }
     }
 }

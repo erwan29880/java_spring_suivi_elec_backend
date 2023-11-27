@@ -108,6 +108,13 @@ public class Requetes extends Connect implements Repo{
             stmt.setDouble(2, 33d);
             stmt.setDate(3, DateManip.toSqlDate("2023-11-26T10:30:00"));
             stmt.executeUpdate();
+
+            stmt  = conn.prepareStatement(sql);
+            stmt.setDouble(1, 86d);
+            stmt.setDouble(2, 38d);
+            stmt.setDate(3, DateManip.toSqlDate("2023-11-27T10:30:00"));
+            stmt.executeUpdate();
+
             super.closeConnexion(conn);
             return true;
         } catch (SQLException e) {

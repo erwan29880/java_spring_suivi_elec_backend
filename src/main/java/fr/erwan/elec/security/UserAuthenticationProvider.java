@@ -109,7 +109,6 @@ public class UserAuthenticationProvider {
             return true;
         }
 
-
         return false;
     }
 
